@@ -8,6 +8,6 @@ import java.util.List;
 
 @Mapper
 public interface MusicMapper {
-    @Select("select * from music where name name rlike #{name}")
+    @Select("select id, name, path, genre, tempo from music where name rlike #{name}")
     public List<Music> getMusic(String name);
 }
