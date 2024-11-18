@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: QingTingServer
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://123.249.30.87:3306/test
+    username: cx
+    password: 111111
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
