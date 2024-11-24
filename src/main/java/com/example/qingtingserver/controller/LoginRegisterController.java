@@ -29,7 +29,7 @@ public class LoginRegisterController {
         if (token != null) {
             return Result.success(token);
         }
-        return Result.error("login failed");
+        return Result.errorMessage("login failed");
     }
 
 
@@ -44,6 +44,6 @@ public class LoginRegisterController {
         if (token != null) {
             return Result.success(token);
         }
-        return Result.error("register failed");
+        return Result.errorMessage("register failed");
     }
 }

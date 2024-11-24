@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.qingtingserver.dao.MusicMapper">
+  <resultMap id="BaseResultMap" type="com.example.qingtingserver.model.Music">
+    <!--@mbg.generated-->
+    <!--@Table music-->
+    <id column="id" property="id" />
+    <result column="name" property="name" />
+    <result column="duration" property="duration" />
+    <result column="path" property="path" />
+    <result column="genre" property="genre" />
+    <result column="tempo" property="tempo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, duration, `path`, genre, tempo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from music
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from music
+    where id = #{id}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.qingtingserver.model.Music" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into music (`name`, duration, `path`, genre, tempo)
+    values (#{name}, #{duration}, #{path}, #{genre}, #{tempo})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.qingtingserver.model.Music" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into music
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="path != null">
+        `path`,
+      </if>
+      <if test="genre != null">
+        genre,
+      </if>
+      <if test="tempo != null">
+        tempo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name},
+      </if>
+      <if test="duration != null">
+        #{duration},
+      </if>
+      <if test="path != null">
+        #{path},
+      </if>
+      <if test="genre != null">
+        #{genre},
+      </if>
+      <if test="tempo != null">
+        #{tempo},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.qingtingserver.model.Music">
+    <!--@mbg.generated-->
+    update music
+    <set>
+      <if test="name != null">
+        `name` = #{name},
+      </if>
+      <if test="duration != null">
+        duration = #{duration},
+      </if>
+      <if test="path != null">
+        `path` = #{path},
+      </if>
+      <if test="genre != null">
+        genre = #{genre},
+      </if>
+      <if test="tempo != null">
+        tempo = #{tempo},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.qingtingserver.model.Music">
+    <!--@mbg.generated-->
+    update music
+    set `name` = #{name},
+      duration = #{duration},
+      `path` = #{path},
+      genre = #{genre},
+      tempo = #{tempo}
+    where id = #{id}
+  </update>
+</mapper>

@@ -1,7 +1,9 @@
 package com.example.qingtingserver.service;
 
+import com.example.qingtingserver.model.PlayList;
 import com.example.qingtingserver.model.User;
 import com.example.qingtingserver.repository.LoginRegisterRepository;
+import com.example.qingtingserver.repository.PlayListRepository;
 import com.example.qingtingserver.utils.AESCyperUtils;
 import com.example.qingtingserver.utils.Argon2PasswordHasher;
 import com.example.qingtingserver.utils.JwtUtil;
@@ -19,12 +21,14 @@ public class LoginRegisterService {
     AESCyperUtils aesCyperUtils;
     Argon2PasswordHasher argon2PasswordHasher;
     JwtUtil jwtUtil;
+    PlayListRepository playListRepository;
     @Autowired
-    public LoginRegisterService(LoginRegisterRepository loginRegisterRepository, AESCyperUtils aesCyperUtils, JwtUtil jwtUtil, Argon2PasswordHasher argon2PasswordHasher) {
+    public LoginRegisterService(LoginRegisterRepository loginRegisterRepository, AESCyperUtils aesCyperUtils, JwtUtil jwtUtil, Argon2PasswordHasher argon2PasswordHasher, PlayListRepository playListRepository) {
         this.loginRegisterRepository = loginRegisterRepository;
         this.aesCyperUtils = aesCyperUtils;
         this.jwtUtil = jwtUtil;
         this.argon2PasswordHasher = argon2PasswordHasher;
+        this.playListRepository = playListRepository;
     }
 
     // 对密码解密
@@ -38,9 +42,11 @@ public class LoginRegisterService {
         // 检查是否合理
         if (!UserValidCheckUtils.checkUser(user)) return null;
         hashUser(user);
-        Integer useId = loginRegisterRepository.register(user);
-        if (useId == null) { return null; }
-        return jwtUtil.generateToken(useId);
+        Integer userId = loginRegisterRepository.register(user);
+        if (userId == null) { return null; }
+        // 注册时候自动生成"我喜欢"歌单
+        playListRepository.addPlayList(new PlayList(userId));
+        return jwtUtil.generateToken(userId);
     }
 
 

@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class TypeMusic {
     private Integer id;
 
-    private String username;
+    private Integer typeId;
 
-    private String password;
+    private Integer musicId;
 }
