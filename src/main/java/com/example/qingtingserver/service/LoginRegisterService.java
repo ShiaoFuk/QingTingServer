@@ -55,6 +55,7 @@ public class LoginRegisterService {
     public String login(User user) {
         //        decodeUser(user);
         User user1 = loginRegisterRepository.login(user);
+        if (user1 == null) { return null; }
         if (!argon2PasswordHasher.verifyPassword(user1.getPassword(), user.getPassword())) {
             return null;
         }
