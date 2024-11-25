@@ -42,7 +42,7 @@ public class JwtUtil {
     /**
      * Parse and validate a JWT token.
      * @param token the JWT token to validate
-     * @return the claims in the token
+     * @return userId if verified else null
      * @throws JwtException if the token is invalid
      */
     public Integer verifyToken(String token) throws JwtException {
@@ -53,14 +53,14 @@ public class JwtUtil {
                     .parseSignedClaims(token);
             Claims claims = jwt.getPayload();
             Date expireTime = claims.getExpiration();
-            if (!expireTime.before(new Date())) {
+            if (expireTime.before(new Date())) {
                 throw new JwtException("expired token");
             }
             return Integer.valueOf(claims.getSubject());
         } catch (JwtException ex) {
             // 验证失败
+            System.out.println(ex.getMessage());
             return null;
         }
     }
-
 }

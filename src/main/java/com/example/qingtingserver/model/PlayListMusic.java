@@ -7,10 +7,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class PlayListMusic {
     private Integer id;
 
-    private String username;
+    /**
+     * 音乐所属的歌单id
+     */
+    private Integer playListId;
 
-    private String password;
+    /**
+     * 歌单的音乐id
+     */
+    private Integer musicId;
 }

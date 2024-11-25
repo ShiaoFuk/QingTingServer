@@ -23,9 +23,15 @@ public class Result {
         return new Result(status.getValue(), status.getMessage(), null);
     }
 
-    public static Result error(String message) {
+    public static Result errorMessage(String message) {
         ResultStatus status = ResultStatus.ERROR;
         return new Result(status.getValue(), message == null ? status.getMessage() : message, null);
+    }
+
+
+    public static Result error(Object object) {
+        ResultStatus status = ResultStatus.ERROR;
+        return new Result(status.getValue(), status.getMessage(), object);
     }
 
 }

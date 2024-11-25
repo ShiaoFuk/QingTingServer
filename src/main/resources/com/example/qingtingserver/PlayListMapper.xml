@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.qingtingserver.dao.PlayListMapper">
+  <resultMap id="BaseResultMap" type="com.example.qingtingserver.model.PlayList">
+    <!--@mbg.generated-->
+    <!--@Table play_list-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="likes" jdbcType="INTEGER" property="likes" />
+    <result column="play_times" jdbcType="INTEGER" property="playTimes" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, `name`, likes, play_times
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from play_list
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from play_list
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.qingtingserver.model.PlayList" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into play_list (user_id, `name`, likes, 
+      play_times)
+    values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{likes,jdbcType=INTEGER}, 
+      #{playTimes,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.qingtingserver.model.PlayList" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into play_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="likes != null">
+        likes,
+      </if>
+      <if test="playTimes != null">
+        play_times,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="likes != null">
+        #{likes,jdbcType=INTEGER},
+      </if>
+      <if test="playTimes != null">
+        #{playTimes,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.qingtingserver.model.PlayList">
+    <!--@mbg.generated-->
+    update play_list
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="likes != null">
+        likes = #{likes,jdbcType=INTEGER},
+      </if>
+      <if test="playTimes != null">
+        play_times = #{playTimes,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.qingtingserver.model.PlayList">
+    <!--@mbg.generated-->
+    update play_list
+    set user_id = #{userId,jdbcType=INTEGER},
+      `name` = #{name,jdbcType=VARCHAR},
+      likes = #{likes,jdbcType=INTEGER},
+      play_times = #{playTimes,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findMusicInPlayList" parameterType="_int" resultMap="com.example.qingtingserver.dao.MusicMapper.BaseResultMap">
+    select * from music where id in
+    (select music_id from play_list_music m where #{id} = m.play_list_id)
+  </select>
+
+  <select id="findPlayListByUserId" parameterType="_int" resultType="com.example.qingtingserver.model.PlayList">
+    select * from play_list where #{id} = user_id;
+  </select>
+
+
+
+</mapper>
