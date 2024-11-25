@@ -10,6 +10,7 @@ import com.example.qingtingserver.utils.JwtUtil;
 import com.example.qingtingserver.utils.UserValidCheckUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +38,7 @@ public class LoginRegisterService {
      * 注册，先对密码解密，再哈希存储
      * @param user 要注册用户
      */
+    @Transactional
     public String register(User user) {
 //        decodeUser(user);
         // 检查是否合理

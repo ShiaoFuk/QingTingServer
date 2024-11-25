@@ -6,6 +6,8 @@ import com.example.qingtingserver.utils.Argon2PasswordHasher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 @Repository
 public class LoginRegisterRepository {
 

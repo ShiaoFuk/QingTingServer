@@ -26,8 +26,8 @@ public class PlayList {
     private Integer likes;
 
     private Integer playTimes;
-
     public PlayList(Integer userId) {
         this.name = "我喜欢";
+        this.userId = userId;
     }
 }

@@ -15,8 +15,6 @@ public interface LoginRegisterMapper {
 
 
 
-
-
     @Select("select * from user where username = #{username}")
     public User loginUser(User user);
 }
