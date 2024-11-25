@@ -13,6 +13,10 @@ public interface LoginRegisterMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     public void registerUser(User user);
 
+
+
+
+
     @Select("select * from user where username = #{username}")
     public User loginUser(User user);
 }
