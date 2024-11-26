@@ -47,7 +47,9 @@ public class LoginRegisterService {
         Integer userId = loginRegisterRepository.register(user);
         if (userId == null) { return null; }
         // 注册时候自动生成"我喜欢"歌单
-        playListRepository.addPlayList(new PlayList(userId));
+        PlayList playList = new PlayList();
+        playList.setUserId(userId);
+        playListRepository.addPlayList(playList);
         return jwtUtil.generateToken(userId);
     }
 

@@ -8,10 +8,12 @@
     <result column="user_id" property="userId" />
     <result column="name" property="name" />
     <result column="likes" property="likes" />
+    <result column="play_times" property="playTimes" />
+    <result column="url" property="url" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, user_id, `name`, likes
+    id, user_id, `name`, likes, play_times, url
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -27,8 +29,8 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.qingtingserver.model.PlayList" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into play_list (user_id, `name`, likes)
-    values (#{userId}, #{name}, #{likes})
+    insert into play_list (user_id, `name`, likes, play_times, url)
+    values (#{userId}, #{name}, #{likes}, #{playTimes}, #{url})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.qingtingserver.model.PlayList" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -43,6 +45,12 @@
       <if test="likes != null">
         likes,
       </if>
+      <if test="playTimes != null">
+        play_times,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -53,6 +61,12 @@
       </if>
       <if test="likes != null">
         #{likes},
+      </if>
+      <if test="playTimes != null">
+        #{playTimes},
+      </if>
+      <if test="url != null">
+        #{url},
       </if>
     </trim>
   </insert>
@@ -69,6 +83,12 @@
       <if test="likes != null">
         likes = #{likes},
       </if>
+      <if test="playTimes != null">
+        play_times = #{playTimes},
+      </if>
+      <if test="url != null">
+        url = #{url},
+      </if>
     </set>
     where id = #{id}
   </update>
@@ -77,7 +97,9 @@
     update play_list
     set user_id = #{userId},
       `name` = #{name},
-      likes = #{likes}
+      likes = #{likes},
+      play_times = #{playTimes},
+      url = #{url}
     where id = #{id}
   </update>
 </mapper>
