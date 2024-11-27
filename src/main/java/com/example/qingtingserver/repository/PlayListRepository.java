@@ -20,7 +20,11 @@ public class PlayListRepository {
 
     // 增加一个歌单
     public Integer addPlayList(PlayList playList) {
-        return playListMapper.insertSelective(playList);
+        Integer affectedNum = playListMapper.insertSelective(playList);
+        if (affectedNum > 0) {
+            return playList.getId();
+        }
+        return null;
     }
 
     // 删除一个歌单

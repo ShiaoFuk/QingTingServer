@@ -19,6 +19,7 @@ public class AESCyperUtils {
 
     public AESCyperUtils(@Value("${AES_KEY}")String aesKeyFilePath) {
         this.aesKeyFilePath = aesKeyFilePath;
+        System.out.println("AES_KEY autowired success");
     }
 
     // 读取二进制密钥文件并返回密钥
