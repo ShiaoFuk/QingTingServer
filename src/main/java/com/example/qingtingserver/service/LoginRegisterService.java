@@ -49,6 +49,7 @@ public class LoginRegisterService {
         // 注册时候自动生成"我喜欢"歌单
         PlayList playList = new PlayList();
         playList.setUserId(userId);
+        playList.setName("我喜欢");
         playListRepository.addPlayList(playList);
         return jwtUtil.generateToken(userId);
     }

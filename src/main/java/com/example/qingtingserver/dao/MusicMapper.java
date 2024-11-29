@@ -22,4 +22,6 @@ public interface MusicMapper {
 
     @Select("select id, name, path, genre, tempo from music where name rlike #{name}")
     List<Music> getMusic(String name);
+
+    
 }
