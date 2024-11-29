@@ -19,7 +19,7 @@ public class JwtUtil {
     private final SecretKey SECRET_KEY;
 
     @Autowired
-    public JwtUtil(@Value("${JWT_KEY}") String SECRET_KEY) {
+    private JwtUtil(@Value("${JWT_KEY}") String SECRET_KEY) {
         this.SECRET_KEY = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
     }
 

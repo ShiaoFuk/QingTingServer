@@ -26,13 +26,13 @@ public class PlayListController {
      * 添加一个歌单
      * @param token
      * @param name 歌单名称
-     * @return 添加的条数
+     * @return id
      */
     @PutMapping("/add")
     public Result addPlayList(@NonNull @Validated @RequestParam String token, @NonNull @Validated @RequestParam String name) {
-        int num = playListService.addPlayList(token, name);
-        if (num > 0) {
-            return Result.success();
+        Integer id = playListService.addPlayList(token, name);
+        if (id != null) {
+            return Result.success(id);
         }
         return Result.errorMessage(NO_RECORDS);
     }
